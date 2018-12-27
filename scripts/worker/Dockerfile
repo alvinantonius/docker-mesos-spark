@@ -3,7 +3,7 @@ FROM centos:7
 COPY start-slave.sh /root/start-slave.sh
 
 # Spark related variables.
-ARG SPARK_VERSION=2.3.1
+ARG SPARK_VERSION=2.4.0
 ARG SPARK_ARCHIVE_NAME=spark-${SPARK_VERSION}-bin-hadoop2.7
 ARG SPARK_DOWNLOAD_URL=http://www-us.apache.org/dist/spark/spark-${SPARK_VERSION}/${SPARK_ARCHIVE_NAME}.tgz
 
