@@ -1,13 +1,17 @@
 FROM centos:7
 
-COPY start-slave.sh /root/start-slave.sh
+ENV APP_HOME /app
+
+RUN mkdir -p $APP_HOME
+
+COPY entrypoint.sh $APP_HOME
 
 # Spark related variables.
 ARG SPARK_VERSION=2.4.0
 ARG SPARK_ARCHIVE_NAME=spark-${SPARK_VERSION}-bin-hadoop2.7
 ARG SPARK_DOWNLOAD_URL=http://www-us.apache.org/dist/spark/spark-${SPARK_VERSION}/${SPARK_ARCHIVE_NAME}.tgz
 
-WORKDIR /root
+WORKDIR $APP_HOME
 
 RUN rpm -Uvh http://repos.mesosphere.io/el/7/noarch/RPMS/mesosphere-el-repo-7-1.noarch.rpm && \
     yum -y install mesos && \
@@ -22,4 +26,4 @@ ENV PATH $SPARK_HOME/bin:$SPARK_HOME/sbin:$PATH
 
 EXPOSE 5051
 
-ENTRYPOINT ["/root/start-slave.sh"]
+ENTRYPOINT ["entrypoint.sh"]
