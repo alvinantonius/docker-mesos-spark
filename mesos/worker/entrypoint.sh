@@ -14,6 +14,7 @@ mesos-slave \
 --master=$MASTER \
 --systemd_enable_support=false \
 --hostname_lookup=$HOSTNAME_LOOKUP \
---ip=$IP
+--ip=$IP \
+--hostname=$IP
 
 
