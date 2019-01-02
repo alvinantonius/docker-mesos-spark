@@ -1,5 +1,12 @@
 ## How to use this image
 
+```
+docker run -d --net=host --restart=always \
+    -e HOST_IP=<IP> \
+    -e SPARK_MASTER=<spark-master-host> \
+    --name=<container-name> <image name>
+```
+
 ## Environment Variables
 
 **`HOST_IP`**
