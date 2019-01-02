@@ -41,5 +41,3 @@ attach volume to `/usr/local/livy/log` to bind the log into your filesystem
 **`Livy Configs`**
 
 attach volume to `/usr/local/livy/conf` to bind the configs into your filesystem and to make the container more configurable
-
-
