@@ -34,6 +34,4 @@ RUN yum -y install unzip && \
 COPY livy-config/ /usr/local/livy/conf
 COPY spark-config/ /usr/local/spark/conf
 
-EXPOSE 8998 4040 10000-10110 23456
-
 ENTRYPOINT ["/app/entrypoint.sh"]
