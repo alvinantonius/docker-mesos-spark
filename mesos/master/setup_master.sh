@@ -1,5 +1,4 @@
 #!/bin/bash
-export PRIVATE_IP=$(hostname -i)
 ZOOKEEPER=${1:-"zk://localhost:2181/mesos"}
 ZOO_CONFIG=${2:-"server.1=localhost:2888:3888 server.2=localhost:2888:3888"}
 ZOO_MY_ID=${3:-"1"}
@@ -14,13 +13,13 @@ docker run -d --name=zookeeper --restart always \
     -e ZOO_SERVERS=$ZOO_CONFIG \
     -e ZOO_LOG4J_PROP="WARN,ROLLINGFILE" \
     -v "$ZOO_LOG_DIR:/logs" \
-    zookeeper
+    zookeeper:3.5
 
 echo "install and run mesos master"
 docker rm -f mesos_master
 docker run -d --net=host --name=mesos_master \
   -e MESOS_PORT=5050 \
-  -e MESOS_ZK=zk://$PRIVATE_IP:2181/mesos \
+  -e MESOS_ZK=zk://$ZOOKEEPER:2181/mesos \
   -e MESOS_QUORUM=1 \
   -e MESOS_REGISTRY=in_memory \
   -e MESOS_LOG_DIR=/var/log/mesos \
